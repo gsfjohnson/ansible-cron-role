@@ -1,0 +1,29 @@
+---
+
+- name: hourly
+  template:
+    src: "file.j2"
+    dest: "/etc/cron.hourly/{{item.filename}}"
+    owner: "{{item.owner|default('root')}}"
+    group: "{{item.group|default('root')}}"
+    mode: "{{item.mode|default(0755)}}"
+  with_items: cron_hourly
+
+- name: daily
+  template:
+    src: "file.j2"
+    dest: "/etc/cron.daily/{{item.filename}}"
+    owner: "{{item.owner|default('root')}}"
+    group: "{{item.group|default('root')}}"
+    mode: "{{item.mode|default(0755)}}"
+  with_items: cron_daily
+
+- name: monthly
+  template:
+    src: "file.j2"
+    dest: "/etc/cron.monthly/{{item.filename}}"
+    owner: "{{item.owner|default('root')}}"
+    group: "{{item.group|default('root')}}"
+    mode: "{{item.mode|default(0755)}}"
+  with_items: cron_monthly
+
