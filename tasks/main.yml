@@ -18,6 +18,15 @@
     mode: "{{item.mode|default(0755)}}"
   with_items: cron_daily
 
+- name: weekly
+  template:
+    src: "file.j2"
+    dest: "/etc/cron.weekly/{{item.filename}}"
+    owner: "{{item.owner|default('root')}}"
+    group: "{{item.group|default('root')}}"
+    mode: "{{item.mode|default(0755)}}"
+  with_items: cron_weekly
+
 - name: monthly
   template:
     src: "file.j2"
@@ -26,4 +35,13 @@
     group: "{{item.group|default('root')}}"
     mode: "{{item.mode|default(0755)}}"
   with_items: cron_monthly
+
+- name: cron.d
+  template:
+    src=crond.j2
+    dest=/etc/cron.d/{{item.filename}}
+    owner="{{item.owner|default('root')}}"
+    group="{{item.group|default('root')}}"
+    mode="{{item.mode|default(0644)}}"
+  with_items: cron_d
 

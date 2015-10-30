@@ -1,0 +1,3 @@
+{% for job in item.jobs %}
+{{ job.minute|default('*') }} {{ job.hour|default('*') }} {{ job.day|default('*') }} {{ job.month|default('*') }} {{ job.weekday|default('*') }} {{ job.user|default('root') }} {{job.cmd}}
+{% endfor %}

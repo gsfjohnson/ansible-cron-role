@@ -1,5 +1,12 @@
 ---
 
+cron_d: []
+#- filename: rsyslog-restart
+#  jobs:
+#  - minute: 30
+#  - hour: 1,8,12,18,22
+#  - cmd: "/sbin/service rsyslogd restart"
 cron_hourly: []
 cron_daily: []
+cron_weekly: []
 cron_monthly: []
