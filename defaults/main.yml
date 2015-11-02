@@ -2,6 +2,7 @@
 
 cron_d: []
 #- filename: rsyslog-restart
+#  mailto: joe@example.com
 #  jobs:
 #  - minute: 30
 #  - hour: 1,8,12,18,22
