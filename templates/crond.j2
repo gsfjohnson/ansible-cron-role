@@ -1,5 +1,5 @@
 {% if item.mailto is defined %}MAILTO="{{item.mailto|default('')}}"
 {% endif %}
 {% for job in item.jobs %}
-{{ job.minute|default('*') }} {{ job.hour|default('*') }} {{ job.day|default('*') }} {{ job.month|default('*') }} {{ job.weekday|default('*') }} {{ job.user|default('root') }} {{job.cmd}}
+{% if job._disabled is defined and job._disabled %}# {% endif %}{{ job.minute|default('*') }} {{ job.hour|default('*') }} {{ job.day|default('*') }} {{ job.month|default('*') }} {{ job.weekday|default('*') }} {{ job.user|default('root') }} {{job.cmd}}
 {% endfor %}
