@@ -1,40 +1,84 @@
 ---
 
-- name: hourly
-  template:
-    src: "file.j2"
+- name: hourly content
+  copy:
+    content: "{{item.content}}"
     dest: "/etc/cron.hourly/{{item.filename}}"
     owner: "{{item.owner|default('root')}}"
     group: "{{item.group|default('root')}}"
     mode: "{{item.mode|default(0755)}}"
-  with_items: cron_hourly
+  with_items: "{{cron_hourly}}"
+  when: item.content is defined
 
-- name: daily
+- name: hourly template
   template:
-    src: "file.j2"
+    src: "{{item.template}}"
+    dest: "/etc/cron.hourly/{{item.filename}}"
+    owner: "{{item.owner|default('root')}}"
+    group: "{{item.group|default('root')}}"
+    mode: "{{item.mode|default(0755)}}"
+  with_items: "{{cron_hourly}}"
+  when: item.template is defined
+
+- name: daily content
+  copy:
+    content: "{{item.content}}"
     dest: "/etc/cron.daily/{{item.filename}}"
     owner: "{{item.owner|default('root')}}"
     group: "{{item.group|default('root')}}"
     mode: "{{item.mode|default(0755)}}"
-  with_items: cron_daily
+  with_items: "{{cron_daily}}"
+  when: item.content is defined
 
-- name: weekly
+- name: daily template
   template:
-    src: "file.j2"
+    src: "{{item.template}}"
+    dest: "/etc/cron.daily/{{item.filename}}"
+    owner: "{{item.owner|default('root')}}"
+    group: "{{item.group|default('root')}}"
+    mode: "{{item.mode|default(0755)}}"
+  with_items: "{{cron_daily}}"
+  when: item.template is defined
+
+- name: weekly content
+  copy:
+    content: "{{item.content}}"
     dest: "/etc/cron.weekly/{{item.filename}}"
     owner: "{{item.owner|default('root')}}"
     group: "{{item.group|default('root')}}"
     mode: "{{item.mode|default(0755)}}"
-  with_items: cron_weekly
+  with_items: "{{cron_weekly}}"
+  when: item.content is defined
 
-- name: monthly
+- name: weekly template
   template:
-    src: "file.j2"
+    content: "{{item.template}}"
+    dest: "/etc/cron.weekly/{{item.filename}}"
+    owner: "{{item.owner|default('root')}}"
+    group: "{{item.group|default('root')}}"
+    mode: "{{item.mode|default(0755)}}"
+  with_items: "{{cron_weekly}}"
+  when: item.template is defined
+
+- name: monthly content
+  copy:
+    content: "{{item.content}}"
     dest: "/etc/cron.monthly/{{item.filename}}"
     owner: "{{item.owner|default('root')}}"
     group: "{{item.group|default('root')}}"
     mode: "{{item.mode|default(0755)}}"
-  with_items: cron_monthly
+  with_items: "{{cron_monthly}}"
+  when: item.content is defined
+
+- name: monthly template
+  template:
+    content: "{{item.template}}"
+    dest: "/etc/cron.monthly/{{item.filename}}"
+    owner: "{{item.owner|default('root')}}"
+    group: "{{item.group|default('root')}}"
+    mode: "{{item.mode|default(0755)}}"
+  with_items: "{{cron_monthly}}"
+  when: item.template is defined
 
 - name: cron.d
   template:
@@ -43,5 +87,5 @@
     owner="{{item.owner|default('root')}}"
     group="{{item.group|default('root')}}"
     mode="{{item.mode|default(0644)}}"
-  with_items: cron_d
+  with_items: "{{cron_d}}"
 
